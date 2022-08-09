@@ -13,17 +13,21 @@ import codecs
 def find_all_file(base):
     for root, ds, fs in os.walk(base):
         for f in fs:
-            fullname = os.path.join(root, f)
-            yield fullname
+            if f.endswith('.c') or f.endswith('.h') or f.endswith('.cpp') or f.endswith('.hpp') or f.endswith('.cc'):
+                fullname = os.path.join(root, f)
+                yield fullname
 
 
 def convert_file_to_utf8(infile, outfile):
     with open(infile, "rb") as f:
         data = f.read()
         t = chardet.detect(data)['encoding']
-        c = codecs.open(infile, "r", t.upper()).read()
-        codecs.open(outfile, "w", "UTF-8").write(c)
-        print(infile + "[" + "\033[31m" + t.upper() + "\033[0m" + "]" + "==>" + outfile + "[\033[95mUTF-8\033[0m]")
+        try:
+            c = codecs.open(infile, "r", t.upper()).read()
+            codecs.open(outfile, "w", "UTF-8").write(c)
+            print(infile + "[" + "\033[31m" + t.upper() + "\033[0m" + "]" + "==>" + outfile + "[\033[95mUTF-8\033[0m]")
+        except Exception as e:
+            print("\033[31m" + infile + ":" + str(e) + "\033[0m")
         f.close()
 
 
