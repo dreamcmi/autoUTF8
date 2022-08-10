@@ -91,13 +91,13 @@ def _main(base, name="XXX"):
     print("encode ok")
     pprint.pprint(sum_dict)
 
-    with open("%s_LOG.json" % args.name, "w", encoding="UTF-8") as f:
+    with open("%s_LOG.json" % name, "w", encoding="UTF-8") as f:
         json.dump(file_dict, f, ensure_ascii=False, indent=4)
         f.close()
-    with open("%s_SUM.json" % args.name, "w", encoding="UTF-8") as f:
+    with open("%s_SUM.json" % name, "w", encoding="UTF-8") as f:
         json.dump(sum_dict, f, ensure_ascii=False, indent=4)
         f.close()
-    with open("%s_ERR.json" % args.name, "w", encoding="UTF-8") as f:
+    with open("%s_ERR.json" % name, "w", encoding="UTF-8") as f:
         json.dump(err_dict, f, ensure_ascii=False, indent=4)
         f.close()
 
